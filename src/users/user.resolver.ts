@@ -10,14 +10,10 @@ export class UserResolver {
     ){}
 
     @Query(returns => UserType)
-    getUsers() {
-        return {
-            id: 'nkn',
-            firstName: 'minhal',
-            lastName: 'kk',
-            email: 'minhal@email.com',
-            mobile: 9292929
-        }
+    getUser(
+        @Args('id') id:string,
+    ) {
+        return this.usersService.getUser(id)
     }
 
     @Mutation(returns => UserType)
@@ -25,7 +21,7 @@ export class UserResolver {
         @Args('firstName') firstName:string,
         @Args('lastName') lastName:string,
         @Args('email') email:string,
-        @Args('mobile') mobile:string
+        @Args('mobile') mobile:number
         ){
             return this.usersService.createUsers(firstName,lastName,email,mobile)
         } 

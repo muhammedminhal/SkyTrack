@@ -10,9 +10,11 @@ import { User } from './users/user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type:'mongodb',
-      url:'mongodb://localhost/skytrack',
+      url:'mongodb://127.0.0.1:27017',
       synchronize:true,
       useUnifiedTopology:true,
+      // useNewUrlParser: true,
+      // logging: true,
       entities:[
         User
       ]

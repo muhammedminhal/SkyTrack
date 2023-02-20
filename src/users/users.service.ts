@@ -8,17 +8,26 @@ import { v4 as uuid} from 'uuid'
 @Injectable()
 export class UsersService {
     constructor(
-        @InjectRepository(User) private UserRepository:Repository<User>
+        @InjectRepository(User) private userRepository:Repository<User>
     ){}
 
-    async createUsers(firstName,lastName,email,mobile){
-        const user = this.UserRepository.create({
+
+    async getUser(id:string):Promise<User>{
+       return  this.userRepository.findOne({ 
+        where: { 
+          id: id
+        } 
+      })
+    }
+
+    async createUsers(firstName,lastName,email,mobile):Promise<User>{
+        const user = this.userRepository.create({
             id:uuid(),
             firstName,
             lastName,
             email,
             mobile
         });
-      return this.UserRepository.save(user)
+      return this.userRepository.save(user)
     }
 }
